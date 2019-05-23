@@ -8,7 +8,8 @@ public class GameSederhana {
         int player[] = {1, 100, 19, 10, 5}; //lvl,health,exp,attack,deffend
         int health[] = {100, 120, 140, 160, 180, 200};
         int exp[] = {20, 50, 100, 150, 200, 250};
-        int monster[][] = {{20, 10, 3, 2}, {50, 15, 7, 5}, {70, 20, 14, 13}, {100, 27, 19, 25}};//HP,ATK,DEF,EXP
+        int monster[][] = {{20, 10, 3, 2}, {50, 15, 7, 10}, {70, 20, 14, 13}, {100, 27, 19, 25}};//HP,ATK,DEF,EXP
+        String monsterName[] = {"Kodok","Ubur - Ubur","Beruang Laut","Cacing Besar Alaska"} ;
         Scanner input = new Scanner(System.in);
 
         int x = 1;
@@ -38,7 +39,7 @@ public class GameSederhana {
             }
             if (b == 1) {
                 System.out.println("");
-                System.out.println("===========================================");
+                System.out.println("==================Monster==================");
                 System.out.println("1. Kodok - ATK 10 DEF 3 EXP 2");
                 System.out.println("2. Ubur - ubur ATK 15 DEF 7 EXP 5");
                 System.out.println("3. Beruang Laut - ATK 20 DEF 14 EXP 13");
@@ -48,32 +49,36 @@ public class GameSederhana {
                 int pilM = input.nextInt();
                 int eHP = monster[pilM - 1][0];
                 a = 1;
-
+                
+                System.out.println("");
                 System.out.println("Musuh ditemukan!!");
                 while (a != 0) {
                     if (a != 0) {
                         System.out.println("------------------------");
                         System.out.println("Player");
                         System.out.println("HP: " + player[1] + "/" + health[i - 1]);
-                        System.out.println("Enemy");
+                        System.out.println(monsterName[pilM-1]);
                         System.out.println("HP: " + eHP + "/" + monster[pilM - 1][0]);
                         System.out.println("------------------------");
                         System.out.println("1. Serang");
                         System.out.println("2. Kabur");
                         System.out.print("Masukan Pilihan: ");
                         int pil = input.nextInt();
+                        System.out.println("");
                         if (pil == 1) {
                             player[1] -= (monster[pilM - 1][1] - player[4]);
                             eHP -= (player[3] - monster[pilM - 1][3]);
+                            System.out.println("Musuh -"+(player[3] - monster[pilM - 1][3])+" HP Player -"+(monster[pilM - 1][1] - player[4])+" HP");
                             if (eHP <= 0) {
+                                System.out.println(monsterName[pilM-1]+" berhasil dibunuh. +"+monster[pilM-1][3]+" exp.");
                                 a = 0;
                                 player[2] += monster[pilM - 1][3];
-                                if (player[2] > exp[player[0]-1]) {
+                                if (player[2] > exp[player[0] - 1]) {
                                     player[0] += 1;
                                     player[2] = 0;
-                                    player[1] = health[player[0]-1];
-                                    player[3] +=5;
-                                    player[4] +=5;
+                                    player[1] = health[player[0] - 1];
+                                    player[3] += 5;
+                                    player[4] += 5;
                                 } else {
 
                                 }
@@ -84,6 +89,7 @@ public class GameSederhana {
                         } else if (pil == 2) {
                             a = 0;
                         } else {
+                            System.out.println("");
                             System.out.println("Masukan Pilihan Yang Benar");
                         }
                     } else {
@@ -91,8 +97,12 @@ public class GameSederhana {
                     }
                 }
             } else if (b == 2) {
+                System.out.println("");
+                System.out.println("HP +"+(health[i-1]-player[1]));
                 player[1] = health[i - 1];
             } else {
+                System.out.println("");
+                System.out.println("Game Shutdown!!");
                 x = 0;
             }
         }
