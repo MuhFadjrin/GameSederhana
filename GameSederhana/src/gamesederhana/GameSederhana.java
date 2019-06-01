@@ -16,7 +16,6 @@ public class GameSederhana {
         int iArmor[] = {1, 0, 0};
         String monsterName[] = {"Kodok", "Ubur - Ubur", "Beruang Laut", "Cacing Besar Alaska"};
         Player p1 = new Player();
-        Weapon wp = new Weapon();
         Game gm = new Game();
 
         int x = 1;
@@ -33,7 +32,7 @@ public class GameSederhana {
             } else if (b == 2) {
                 p1.healPlayer(player, health);
             } else if (b == 3) {
-                wp.pilihWeapon(iArmor, iWeapon, player);
+                p1.pilihWeapon(iArmor, iWeapon, player);
             } else {
                 System.out.println("");
                 System.out.println("Game Shutdown!!");
@@ -239,10 +238,6 @@ class Player {
             }
         }
     }
-}
-
-class Weapon {
-
     public int pilihWeapon(int iArmor[], int iWeapon[], int player[]) {
         Scanner input = new Scanner(System.in);
         System.out.println("");
@@ -277,3 +272,4 @@ class Weapon {
         return 0;
     }
 }
+
