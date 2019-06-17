@@ -20,19 +20,16 @@ public class GameSederhana {
 
         int x = 1;
         while (x != 0) {
-            int i = player[0];
-            int a = 1;
-            int b = 0;
-            b = gm.menuUtama(player, health, exp, weapon, armor, a, b);
+            int i = player[0]; //level player
+            int b = gm.menuUtama(player, health, exp, weapon, armor, i); //menampilkan menu utama dan menunggu return pilihan menu
             if (b == 1) {
-                int z = 1;
-                int pilM = p1.pilihMonster();
-                int eHP = monster[pilM - 1][0];
-                p1.serangMonster(player, health, i, monsterName, eHP, monster, pilM, armor, weapon, exp, iWeapon, iArmor);
+                int pilM = p1.pilihMonster(); //memilih monster
+                int eHP = monster[pilM - 1][0]; // memberi nilai HP monster pada variabel sementara
+                p1.serangMonster(player, health, i, monsterName, eHP, monster, pilM, armor, weapon, exp, iWeapon, iArmor); //menu menyerang monster
             } else if (b == 2) {
-                p1.healPlayer(player, health);
+                p1.healPlayer(player, health, i); // heal
             } else if (b == 3) {
-                p1.pilihWeapon(iArmor, iWeapon, player);
+                p1.pilihWeapon(iArmor, iWeapon, player); // memilih equipment
             } else {
                 System.out.println("");
                 System.out.println("Game Shutdown!!");
@@ -45,9 +42,8 @@ public class GameSederhana {
 
 class Game {
 
-    public int menuUtama(int player[], int health[], int exp[], int weapon[][], int armor[][], int a, int b) {
+    public int menuUtama(int player[], int health[], int exp[], int weapon[][], int armor[][],int i) {
         Scanner input = new Scanner(System.in);
-        int i = player[0];
         System.out.println("-----------------------------");
         System.out.println("Lvl:    " + player[0]);
         System.out.println("Health: " + player[1] + "/" + health[i - 1]);
@@ -59,10 +55,12 @@ class Game {
         System.out.println("2. Heal");
         System.out.println("3. Pakai Weapon dan armor");
         System.out.println("4. Keluar");
+        int a =1;
+        int b =0;
         while (a != 0) {
             System.out.print("Masukan Pilihan: ");
             b = input.nextInt();
-            if (b == 1 || b == 2 || b == 3 || b == 4) {
+            if (b >=1 && b <= 4) {
                 a = 0;
             } else {
                 System.out.println("Masukan Inputan Dengan Benar");
@@ -75,16 +73,15 @@ class Game {
 
 class Player {
 
-    public void healPlayer(int player[], int health[]) {
+    public void healPlayer(int player[], int health[],int i) {
         System.out.println("");
-        int i = player[0];
-        System.out.println("HP +" + (health[i - 1] - player[1]));
-        player[1] = health[i - 1];
+        System.out.println("HP +" + (health[i - 1] - player[1])); //output HP +(hp max - hp player)
+        player[1] = health[i - 1]; //hp player = hp max
     }
 
     public int pilihMonster() {
         Scanner input = new Scanner(System.in);
-        int z = 1;
+        int z = 1; //untuk perulangan sampai memilih monster yang benar
         int pilM = 0;
         while (z != 0) {
 
@@ -106,7 +103,7 @@ class Player {
                 System.out.println("Musuh ditemukan!!");
             }
         }
-        return pilM;
+        return pilM; // return monster yang dipilih
     }
 
     public void serangMonster(int player[], int health[], int i, String monsterName[], int eHP, int monster[][], int pilM, int armor[][], int weapon[][], int exp[], int iWeapon[], int iArmor[]) {
@@ -272,4 +269,3 @@ class Player {
         return 0;
     }
 }
-
